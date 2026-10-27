@@ -54,6 +54,13 @@ def get_store() -> GuessStore:
 
 
 model, store = get_model(), get_store()
+host = st.context.headers.get("Host", "localhost").split(":")[0]
+if store.backend == "sqlite" and host not in ("localhost", "127.0.0.1"):
+    # Hosted without a database: a local file there is wiped on every restart, so
+    # collecting guesses would silently lose them. Refuse instead.
+    st.error("This app is not connected to its database, so it is not collecting answers right now. "
+             "(Owner: set DATABASE_URL in the app's Secrets.)")
+    st.stop()
 state = st.session_state
 if "rater_id" not in state:
     state.rater_id = uuid.uuid4().hex[:16]

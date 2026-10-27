@@ -46,7 +46,7 @@ class GuessStore:
 
     def _connect_postgres(self) -> None:
         import psycopg  # only needed in the cloud
-        self.conn = psycopg.connect(self.database_url, autocommit=True)
+        self.conn = psycopg.connect(self.database_url, autocommit=True, connect_timeout=10)
         self.conn.execute(SCHEMA.format(pk="BIGSERIAL PRIMARY KEY"))
 
     def _execute(self, sql: str, values: tuple = ()):

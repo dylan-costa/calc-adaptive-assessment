@@ -53,7 +53,15 @@ def get_store() -> GuessStore:
     return GuessStore(database_url())
 
 
-model, store = get_model(), get_store()
+model = get_model()
+try:
+    store = get_store()     # a failed connection is not cached, so the next page load retries
+except Exception as e:
+    # e.g. the database is waking up, or the credentials in Secrets are out of date
+    print(f"database connection failed: {type(e).__name__}: {e}")   # full reason goes to the app logs
+    st.error("The game can't reach its database right now, so it can't save answers. "
+             "Please try again in a minute.")
+    st.stop()
 host = st.context.headers.get("Host", "localhost").split(":")[0]
 if store.backend == "sqlite" and host not in ("localhost", "127.0.0.1"):
     # Hosted without a database: a local file there is wiped on every restart, so

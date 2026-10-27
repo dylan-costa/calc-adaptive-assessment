@@ -1,0 +1,6 @@
+# Dependencies for the deployed game only (Streamlit Community Cloud reads this file).
+# The research code in src/ needs much more (see pyproject.toml); the game does not.
+streamlit>=1.40
+numpy
+pandas
+psycopg[binary]>=3.1

@@ -1,0 +1,14 @@
+\begin{tabular}{rccll}
+\toprule
+\# & depth & chain & rule & applied to \\
+\midrule
+1 & 0 & 0 & \code{PRODUCT} & $x^{2} \sin\left(e^{3 x}\right)$ \\
+2 & 1 & 0 & \code{POWER} & $x^{2}$ \\
+3 & 1 & 0 & \code{FN\_sin} & $\sin\left(e^{3 x}\right)$ \\
+4 & 1 & 0 & \code{CHAIN} & $\sin\left(e^{3 x}\right)$ \\
+5 & 2 & 1 & \code{FN\_exp} & $e^{3 x}$ \\
+6 & 2 & 1 & \code{CHAIN} & $e^{3 x}$ \\
+7 & 3 & 2 & \code{CONST\_MULT} & $3 x$ \\
+8 & 4 & 2 & \code{VAR} & $x$ \\
+\bottomrule
+\end{tabular}

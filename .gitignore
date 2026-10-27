@@ -1,0 +1,19 @@
+.venv/
+__pycache__/
+*.egg-info/
+.pytest_cache/
+# LaTeX build products (the PDF itself is committed)
+notes/*.aux
+notes/*.log
+notes/*.out
+notes/*.toc
+notes/*.fls
+notes/*.fdb_latexmk
+notes/*.synctex.gz
+# local test runs of the game (the deployed game stores guesses in Postgres)
+game/guesses.sqlite
+# Streamlit secrets (database credentials) must never be committed
+.streamlit/secrets.toml
+# database backups and local tool config
+data/*.backup*.sqlite
+.claude/
